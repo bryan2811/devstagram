@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: {
+        fontFamily: {
+            'inter': ['Inter', 'sans-serif'],
+        },
         fontSize: {
             sm: 'clamp(0.7rem, 0.07vw + 0.69rem, 0.75rem)',
             base: 'clamp(0.88rem, 0.16vw + 0.84rem, 1rem)',
