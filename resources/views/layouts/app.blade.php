@@ -31,10 +31,27 @@
                 DevStagram
             </h1>
 
-            <nav class="flex gap-2 items-center *:font-bold *:uppercase *:text-gray-600 *:text-sm *:sm:text-base">
-                <a href="{{ route('login') }}">Login</a>
-                <a href="{{ route('register') }}">Create Account</a>
-            </nav>
+            @auth
+                <nav class="flex gap-2 items-center *:font-bold *:text-gray-600 *:text-sm *:sm:text-base">
+                    <a href="#">
+                        Hey: <span class="font-normal">{{ auth()->user()->name }}</span>
+                    </a>
+                    <form
+                        method="POST"
+                        action="{{ route('logout') }}"
+                    >
+                        @csrf
+                        <button type="submit">Logout</button>
+                    </form>
+                </nav>
+            @endauth
+
+            @guest
+                <nav class="flex gap-2 items-center *:font-bold *:uppercase *:text-gray-600 *:text-sm *:sm:text-base">
+                    <a href="{{ route('login') }}">Login</a>
+                    <a href="{{ route('register') }}">Create Account</a>
+                </nav>
+            @endguest
         </div>
     </header>
 

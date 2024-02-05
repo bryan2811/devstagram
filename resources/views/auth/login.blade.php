@@ -58,6 +58,17 @@
                     @enderror
                 </div>
 
+                <div class="flex items-center gap-2 mb-5">
+                    <input
+                        id="remember"
+                        type="checkbox"
+                        name="remember"
+                    ><label
+                        class="text-sm text-gray-500"
+                        for="remember"
+                    >Remember Me</label>
+                </div>
+
                 <button
                     class="w-full p-3 font-bold text-white uppercase transition-colors rounded-lg cursor-pointer bg-sky-600 hover:bg-sky-700"
                     type="submit"
