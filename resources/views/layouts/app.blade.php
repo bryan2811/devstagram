@@ -32,7 +32,7 @@
             </h1>
 
             <nav class="flex gap-2 items-center *:font-bold *:uppercase *:text-gray-600 *:text-sm *:sm:text-base">
-                <a href="#">Login</a>
+                <a href="{{ route('login') }}">Login</a>
                 <a href="{{ route('register') }}">Create Account</a>
             </nav>
         </div>
