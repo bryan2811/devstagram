@@ -1,4 +1,11 @@
 @extends('layouts.app')
+@push('styles')
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css"
+        type="text/css"
+    />
+@endpush
 
 @section('title', 'Create Post - DevStagram')
 
@@ -6,10 +13,14 @@
     <div class="md:flex md:items-center">
         <div class="px-10 md:w-1/2">
             <form
-                action="/img"
                 id="dropzone"
+                action="{{ route('images.store') }}"
+                method="POST"
+                enctype="multipart/form-data"
                 class="flex flex-col items-center justify-center w-full border-2 border-dashed rounded dropzone h-96"
-            ></form>
+            >
+                @csrf
+            </form>
         </div>
 
         <div class="p-10 mt-10 bg-white rounded-lg shadow-xl md:w-1/2 md:mt-0">
