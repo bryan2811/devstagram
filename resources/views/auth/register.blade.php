@@ -24,12 +24,12 @@
                         for="name"
                     >Name</label>
                     <input
-                        class="w-full p-3 border rounded-lg @error('name') border-red-500 @enderror"
                         id="name"
+                        class="w-full p-3 border rounded-lg @error('name') border-red-500 @enderror"
                         name="name"
                         type="text"
-                        value={{ old('name') }}
                         placeholder="Your Name"
+                        value={{ old('name') }}
                     >
                     @error('name')
                         <p class="p-2 my-2 text-center text-white bg-red-500 rounded-lg">{{ $message }}</p>
@@ -42,11 +42,12 @@
                         for="username"
                     >Username</label>
                     <input
-                        class="w-full p-3 border rounded-lg @error('username') border-red-500 @enderror"
                         id="username"
+                        class="w-full p-3 border rounded-lg @error('username') border-red-500 @enderror"
                         name="username"
                         type="text"
                         placeholder="Your Username"
+                        value={{ old('username') }}
                     >
                     @error('username')
                         <p class="p-2 my-2 text-center text-white bg-red-500 rounded-lg">{{ $message }}</p>
@@ -59,11 +60,12 @@
                         for="email"
                     >Email</label>
                     <input
-                        class="w-full p-3 border rounded-lg @error('email') border-red-500 @enderror"
                         id="email"
+                        class="w-full p-3 border rounded-lg @error('email') border-red-500 @enderror"
                         name="email"
                         type="text"
                         placeholder="Your Email"
+                        value={{ old('email') }}
                     >
                     @error('email')
                         <p class="p-2 my-2 text-center text-white bg-red-500 rounded-lg">{{ $message }}</p>
@@ -76,8 +78,8 @@
                         for="password"
                     >Password</label>
                     <input
-                        class="w-full p-3 border rounded-lg @error('password') border-red-500 @enderror"
                         id="password"
+                        class="w-full p-3 border rounded-lg @error('password') border-red-500 @enderror"
                         name="password"
                         type="password"
                         placeholder="Your Password"
@@ -93,8 +95,8 @@
                         for="password_confirmation"
                     >Confirm Password</label>
                     <input
-                        class="w-full p-3 border rounded-lg"
                         id="password_confirmation"
+                        class="w-full p-3 border rounded-lg"
                         name="password_confirmation"
                         type="password"
                         placeholder="Confirm Password"
