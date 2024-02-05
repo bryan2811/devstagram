@@ -106,7 +106,8 @@
                 <button
                     class="w-full p-3 font-bold text-white uppercase transition-colors rounded-lg cursor-pointer bg-sky-600 hover:bg-sky-700"
                     type="submit"
-                >Create Account</button>
+                >Create Account
+                </button>
             </form>
         </div>
     </div>
