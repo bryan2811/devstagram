@@ -10,13 +10,16 @@ class PostController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['show', 'index']);
     }
 
     public function index(User $user)
     {
+        $userPosts = Post::where('user_id', $user->id)->paginate(20);
+
         return view('dashboard', [
             'user' => $user,
+            'posts' => $userPosts
         ]);
     }
 
@@ -33,7 +36,7 @@ class PostController extends Controller
             'image' => 'required',
         ]);
 
-        Post::create([
+        $request->user()->posts()->create([
             'title' => $request->title,
             'description' => $request->description,
             'image' => $request->image,
@@ -41,5 +44,13 @@ class PostController extends Controller
         ]);
 
         return redirect()->route('posts.index', auth()->user()->username);
+    }
+
+    public function show(User $user, Post $post)
+    {
+        return view('posts.show', [
+            'post' => $post,
+            'user' => $user
+        ]);
     }
 }
