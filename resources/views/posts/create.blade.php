@@ -25,7 +25,7 @@
 
         <div class="p-10 mt-10 bg-white rounded-lg shadow-xl md:w-1/2 md:mt-0">
             <form
-                action="{{ route('register') }}"
+                action="{{ route('posts.store') }}"
                 method="POST"
                 novalidate
             >
@@ -61,7 +61,19 @@
                         placeholder="Post Description"
                         value={{ old('description') }}
                     >{{ old('title') }}</textarea>
+
                     @error('description')
+                        <p class="p-2 my-2 text-center text-white bg-red-500 rounded-lg">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div class="mb-5">
+                    <input
+                        name="image"
+                        type="hidden"
+                        value="{{ old('image') }}"
+                    >
+                    @error('image')
                         <p class="p-2 my-2 text-center text-white bg-red-500 rounded-lg">{{ $message }}</p>
                     @enderror
                 </div>
