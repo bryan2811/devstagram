@@ -35,7 +35,7 @@
 
         @if ($posts->count() > 0)
             <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                @foreach ($posts as $post)
+                @foreach ($posts->reverse() as $post)
                     <div>
                         <a href="{{ route('posts.show', ['post' => $post, 'user' => $user]) }}">
                             <img
