@@ -23,6 +23,7 @@
     >
     @vite('resources/css/app.css')
     @stack('styles')
+    @livewireStyles
 </head>
 
 <body class="bg-gray-100">
@@ -98,6 +99,7 @@
     </footer>
 
     @vite('resources/js/app.js')
+    @livewireScripts
 </body>
 
 </html>
