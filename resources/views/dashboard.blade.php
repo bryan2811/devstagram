@@ -93,9 +93,9 @@
 
         @if ($posts->count() > 0)
             <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                @foreach ($posts->reverse() as $post)
+                @foreach ($posts as $post)
                     <div>
-                        <a href="{{ route('posts.show', ['post' => $post, 'user' => $user]) }}">
+                        <a href="{{ route('posts.show', ['post' => $post, 'user' => $post->user]) }}">
                             <img
                                 src="{{ asset('uploads') . '/' . $post->image }}"
                                 alt="Post Image {{ $post->title }}"
