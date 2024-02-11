@@ -38,16 +38,51 @@
                 </div>
 
                 <p class="mb-3 text-sm font-bold text-gray-800">
-                    <span class="font-normal">Followers:</span>
+                    {{ $user->followers->count() }}
+                    <span class="font-normal">@choice('Follower|Followers', $user->followers->count())</span>
                 </p>
 
                 <p class="mb-3 text-sm font-bold text-gray-800">
-                    <span class="font-normal">Following:</span>
+                    {{ $user->followings->count() }}
+                    <span class="font-normal">Following</span>
                 </p>
                 <p class="mb-3 text-sm font-bold text-gray-800">
                     {{ $user->posts->count() }}
                     <span class="font-normal">Posts</span>
                 </p>
+
+                @auth
+                    @if ($user->id !== auth()->user()->id)
+                        @if (!$user->following(auth()->user()))
+                            <form
+                                action="{{ route('users.follow', $user) }}"
+                                method="POST"
+                            >
+                                @csrf
+
+                                <input
+                                    class="px-3 py-1 text-sm font-bold text-white uppercase bg-blue-600 rounded-lg cursor-pointer"
+                                    type="submit"
+                                    value="Follow"
+                                >
+                            </form>
+                        @else
+                            <form
+                                action="{{ route('users.unfollow', $user) }}"
+                                method="POST"
+                            >
+                                @method('DELETE')
+                                @csrf
+
+                                <input
+                                    class="px-3 py-1 text-sm font-bold text-white uppercase bg-red-600 rounded-lg cursor-pointer"
+                                    type="submit"
+                                    value="Unfollow"
+                                >
+                            </form>
+                        @endif
+                    @endif
+                @endauth
             </div>
             <div></div>
         </div>
