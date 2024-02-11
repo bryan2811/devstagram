@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 
 /*
@@ -30,6 +31,10 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'store']);
 Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
+
+// Profile Routes
+Route::get('/edit-profile', [ProfileController::class, 'index'])->name('profile.index');
+Route::post('/edit-profile', [ProfileController::class, 'store'])->name('profile.store');
 
 Route::get('/{user:username}', [PostController::class, 'index'])->name('posts.index');
 Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');

@@ -3,6 +3,7 @@
 /public/build
 /public/hot
 /public/storage
+/public/profiles
 /public/uploads
 /storage/*.key
 /vendor
