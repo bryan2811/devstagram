@@ -21,6 +21,18 @@ jobs:
       - name: Install Composer Dependencies
         run: composer install --prefer-dist --no-progress --no-suggest
 
+      # Añade el paso para instalar Node y ejecutar npm run build
+      - name: Install Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: "10.4.0"
+
+      - name: Install NPM Dependencies
+        run: npm install
+
+      - name: Build assets with Vite
+        run: npm run build
+
       - name: Prepare Laravel Environment
         run: |
           cp .env.example .env
@@ -36,19 +48,19 @@ jobs:
           port: 65002
           source: "."
           target: "/home/u679007062/domains/devstagram.codebybryan.tech"
-          exclude: "public/*"
           rm: true
 
-      # Despliegue específico de la carpeta public al directorio public_html/public_html
-      - name: Deploy public folder to Hostinger
+      # Despliegue específico del contenido de la carpeta public al directorio public_html/public_html
+      - name: Deploy public folder content to Hostinger
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.HOSTINGER_HOST }}
           username: ${{ secrets.HOSTINGER_USERNAME }}
           password: ${{ secrets.HOSTINGER_PASSWORD }}
           port: 65002
-          source: "public/*"
-          target: "/home/u679007062/domains/devstagram.codebybryan.tech/public_html"
+          source: "public/*" # Esto selecciona el contenido dentro de la carpeta public
+          target: "/home/u679007062/domains/devstagram.codebybryan.tech/public_html/"
+          strip_components: 1 # Esto elimina la primera carpeta del path en el destino
           rm: true
 
       - name: Create .env file
