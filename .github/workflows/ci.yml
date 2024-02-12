@@ -51,7 +51,7 @@ jobs:
           target: "/home/u679007062/domains/devstagram.codebybryan.tech/public_html"
           rm: true
 
-        - name: Create .env file
+      - name: Create .env file
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOSTINGER_HOST }}
