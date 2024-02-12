@@ -74,7 +74,7 @@ jobs:
             cat > /home/u679007062/domains/devstagram.codebybryan.tech/.env << EOF
             APP_NAME=Laravel
             APP_ENV=local
-            APP_KEY=base64:zX4+IZvHgv+n48irLplfU77z/7sN+/GO7bzkfgQwhrc=
+            APP_KEY=${{ secrets.APP_KEY }}
             APP_DEBUG=true
             APP_URL=http://localhost
 
