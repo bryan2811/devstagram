@@ -35,7 +35,7 @@ jobs:
           password: ${{ secrets.HOSTINGER_PASSWORD }}
           port: 65002
           source: "."
-          target: "/home/u679007062/public_html"
+          target: "/home/u679007062/domains/devstagram.codebybryan.tech"
           exclude: "public/*"
           rm: true
 
@@ -48,7 +48,7 @@ jobs:
           password: ${{ secrets.HOSTINGER_PASSWORD }}
           port: 65002
           source: "public/*"
-          target: "/home/u679007062/public_html/public_html"
+          target: "/home/u679007062/domains/devstagram.codebybryan.tech/public_html"
           rm: true
 
       - name: Run Post-Deployment Commands
