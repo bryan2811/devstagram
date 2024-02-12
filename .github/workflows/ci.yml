@@ -15,7 +15,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.2"
+          php-version: "8.1.2"
           extensions: mbstring, xml, ctype, iconv, intl, pdo_mysql
 
       - name: Install Composer Dependencies
@@ -59,7 +59,7 @@ jobs:
           password: ${{ secrets.HOSTINGER_PASSWORD }}
           port: 65002
           script: |
-            cd /home/u679007062/public_html
+            cd /home/u679007062/domains/devstagram.codebybryan.tech
             php artisan migrate --force
             php artisan config:cache
             php artisan route:cache
