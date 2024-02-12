@@ -58,6 +58,21 @@ jobs:
           strip_components: 1
           rm: true
 
+      - name: Create Symlink for uploads
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOSTINGER_HOST }}
+          username: ${{ secrets.HOSTINGER_USERNAME }}
+          password: ${{ secrets.HOSTINGER_PASSWORD }}
+          port: 65002
+          script: |
+            # Ensure the target directory exists
+            mkdir -p /home/u679007062/domains/devstagram.codebybryan.tech/public_html/uploads
+            # Remove the symlink if it already exists
+            rm -rf /home/u679007062/domains/devstagram.codebybryan.tech/public_html/uploads
+            # Create a symlink from public_html/uploads to public/uploads
+            ln -s /home/u679007062/domains/devstagram.codebybryan.tech/public/uploads /home/u679007062/domains/devstagram.codebybryan.tech/public_html/uploads
+
       - name: Create .env file
         uses: appleboy/ssh-action@master
         with:
@@ -132,16 +147,6 @@ jobs:
 
             MEILISEARCH_NO_ANALYTICS=false
             EOF
-
-      - name: Create Symlink for Uploads
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOSTINGER_HOST }}
-          username: ${{ secrets.HOSTINGER_USERNAME }}
-          password: ${{ secrets.HOSTINGER_PASSWORD }}
-          port: 65002
-          script: |
-            ln -sfn /home/u679007062/domains/devstagram.codebybryan.tech/public_html/uploads /home/u679007062/domains/devstagram.codebybryan.tech/public/uploads
 
       - name: Run Post-Deployment Commands
         uses: appleboy/ssh-action@master
