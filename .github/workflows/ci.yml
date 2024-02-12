@@ -3,7 +3,7 @@ name: Laravel Deploy to Hostinger
 on:
   push:
     branches:
-      - dev
+      - master
 
 jobs:
   deploy:
@@ -21,7 +21,7 @@ jobs:
       - name: Install Composer Dependencies
         run: composer install --prefer-dist --no-progress --no-suggest
 
-      # Añade el paso para instalar Node y ejecutar npm run build
+      # Node Installation & Build
       - name: Install Node
         uses: actions/setup-node@v2
         with:
@@ -38,7 +38,7 @@ jobs:
           cp .env.example .env
           php artisan key:generate
 
-      # Despliegue del resto del proyecto excluyendo la carpeta public
+      # Project deployment excluding public folder
       - name: Deploy Project to Hostinger (excluding public folder)
         uses: appleboy/scp-action@master
         with:
@@ -50,7 +50,7 @@ jobs:
           target: "/home/u679007062/domains/devstagram.codebybryan.tech"
           rm: true
 
-      # Despliegue específico del contenido de la carpeta public al directorio public_html/public_html
+      # Deploy the contents of the Laravel public folder to the public_html/public_html directory.
       - name: Deploy public folder content to Hostinger
         uses: appleboy/scp-action@master
         with:
@@ -58,9 +58,9 @@ jobs:
           username: ${{ secrets.HOSTINGER_USERNAME }}
           password: ${{ secrets.HOSTINGER_PASSWORD }}
           port: 65002
-          source: "public/*" # Esto selecciona el contenido dentro de la carpeta public
+          source: "public/*"
           target: "/home/u679007062/domains/devstagram.codebybryan.tech/public_html/"
-          strip_components: 1 # Esto elimina la primera carpeta del path en el destino
+          strip_components: 1
           rm: true
 
       - name: Create .env file
