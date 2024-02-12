@@ -1,0 +1,60 @@
+name: Laravel Deploy to Hostinger
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Composer Dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Prepare Laravel Environment
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+
+      # Despliegue del resto del proyecto excluyendo la carpeta public
+      - name: Deploy Project to Hostinger (excluding public folder)
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOSTINGER_HOST }}
+          username: ${{ secrets.HOSTINGER_USERNAME }}
+          password: ${{ secrets.HOSTINGER_PASSWORD }}
+          port: 65002
+          source: "."
+          target: "/home/u679007062/public_html"
+          exclude: "public/*"
+          rm: true
+
+      # Despliegue específico de la carpeta public al directorio public_html/public_html
+      - name: Deploy public folder to Hostinger
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.HOSTINGER_HOST }}
+          username: ${{ secrets.HOSTINGER_USERNAME }}
+          password: ${{ secrets.HOSTINGER_PASSWORD }}
+          port: 65002
+          source: "public/*"
+          target: "/home/u679007062/public_html/public_html"
+          rm: true
+
+      - name: Run Post-Deployment Commands
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOSTINGER_HOST }}
+          username: ${{ secrets.HOSTINGER_USERNAME }}
+          password: ${{ secrets.HOSTINGER_PASSWORD }}
+          port: 65002
+          script: |
+            cd /home/u679007062/public_html
+            php artisan migrate --force
+            php artisan config:cache
+            php artisan route:cache
+            php artisan view:cache
