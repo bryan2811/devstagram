@@ -134,14 +134,14 @@ jobs:
             EOF
 
       - name: Create Symlink for Uploads
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.HOSTINGER_HOST }}
-        username: ${{ secrets.HOSTINGER_USERNAME }}
-        password: ${{ secrets.HOSTINGER_PASSWORD }}
-        port: 65002
-        script: |
-          ln -sfn /home/u679007062/domains/devstagram.codebybryan.tech/public_html/uploads /home/u679007062/domains/devstagram.codebybryan.tech/public/uploads
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOSTINGER_HOST }}
+          username: ${{ secrets.HOSTINGER_USERNAME }}
+          password: ${{ secrets.HOSTINGER_PASSWORD }}
+          port: 65002
+          script: |
+            ln -sfn /home/u679007062/domains/devstagram.codebybryan.tech/public_html/uploads /home/u679007062/domains/devstagram.codebybryan.tech/public/uploads
 
       - name: Run Post-Deployment Commands
         uses: appleboy/ssh-action@master
