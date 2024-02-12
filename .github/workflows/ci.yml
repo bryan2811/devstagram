@@ -58,7 +58,7 @@ jobs:
           strip_components: 1
           rm: true
 
-      - name: Create Symlink for uploads
+      - name: Create Symlinks for uploads and profiles
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOSTINGER_HOST }}
@@ -66,12 +66,17 @@ jobs:
           password: ${{ secrets.HOSTINGER_PASSWORD }}
           port: 65002
           script: |
-            # Ensure the target directory exists
+            # Ensure the target directories exist
             mkdir -p /home/u679007062/domains/devstagram.codebybryan.tech/public_html/uploads
-            # Remove the symlink if it already exists
+            mkdir -p /home/u679007062/domains/devstagram.codebybryan.tech/public_html/profiles
+
+            # Remove the symlinks if they already exist
             rm -rf /home/u679007062/domains/devstagram.codebybryan.tech/public_html/uploads
-            # Create a symlink from public_html/uploads to public/uploads
+            rm -rf /home/u679007062/domains/devstagram.codebybryan.tech/public_html/profiles
+
+            # Create symlinks from public_html to the public directory
             ln -s /home/u679007062/domains/devstagram.codebybryan.tech/public/uploads /home/u679007062/domains/devstagram.codebybryan.tech/public_html/uploads
+            ln -s /home/u679007062/domains/devstagram.codebybryan.tech/public/profiles /home/u679007062/domains/devstagram.codebybryan.tech/public_html/profiles
 
       - name: Create .env file
         uses: appleboy/ssh-action@master
