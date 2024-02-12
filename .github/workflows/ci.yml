@@ -143,7 +143,6 @@ jobs:
         script: |
           ln -sfn /home/u679007062/domains/devstagram.codebybryan.tech/public_html/uploads /home/u679007062/domains/devstagram.codebybryan.tech/public/uploads
 
-
       - name: Run Post-Deployment Commands
         uses: appleboy/ssh-action@master
         with:
